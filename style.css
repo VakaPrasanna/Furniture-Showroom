@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family:'Times New Roman', Times, serif;
+}
+
+.nav{
+    background-color: #e7c6ff;
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.cart{
+    background-color: #fff;
+    color:#c55df6;
+    font-weight: 900;
+    padding: 7px;
+    font-size: 25px;
+    border-radius: 5px;
+}

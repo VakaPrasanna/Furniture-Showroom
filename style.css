@@ -11,7 +11,7 @@ body{
 
 .nav{
     background-color: #e7c6ff;
-    padding: 20px 60px;
+    padding: 30px 60px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -29,7 +29,7 @@ body{
 }
 
 .cartPrice{
-    background-color: purple;
+    background-color: red;
     color:#fff;
     position: absolute;
     top:-15px;

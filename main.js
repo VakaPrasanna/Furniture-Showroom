@@ -32,6 +32,8 @@ let cardData=[
     },
 ];
 
+let stores= [];
+
 let products = () => {
     return (card.innerHTML = cardData.map((x)=>{
         let {id, name, img,desc, amt} = x;
@@ -44,9 +46,9 @@ let products = () => {
                <div class="price">
                   <h3>₹ ${amt}</h3>
                   <div class="buttons">
-                    <i class="bi bi-dash-square"></i>
+                    <i onclick="decMinus(${id})" class="bi bi-dash-square"></i>
                     <div id=${id} class="qty">0</div>
-                    <i class="bi bi-plus-square"></i>   
+                    <i onclick="incPlus(${id})" class="bi bi-plus-square"></i>   
                   </div>
                </div>
             </div>
@@ -55,5 +57,40 @@ let products = () => {
 };
 
 products();
+
+let incPlus = (id) => {
+    let itemSelected = id;
+    let SearchedId = stores.find((x)=> x.id === itemSelected);//Finds the item id in stores, if selectedId is not there: then it adds item to "stores" else just ++qty of that selected item.
+
+    if(SearchedId === undefined){
+        stores.push({
+            id:itemSelected,
+            qty:1,
+        });
+    }
+    else{
+        SearchedId.qty+=1;
+    }
+
+    //console.log(stores);
+    updateqty(itemSelected);
+};
+let decMinus = (id)=> {
+    let itemSelected = id;
+    let SearchedId = stores.find((x)=> x.id === itemSelected);//Finds the item id in stores, if selectedId is not there: then it adds item to "stores" else just ++qty of that selected item.
+
+    if(SearchedId.qty === 0) return;// It stops decrementing at the moment qty hits 0 (-- Process stops).
+    else{
+        SearchedId.qty-=1;
+    }
+
+    //console.log(stores);
+    updateqty(itemSelected);
+};
+let updateqty = (id) => {
+    let SearchedId = stores.find((x)=> x.id === id);
+    console.log(SearchedId.qty);
+    document.getElementById(id).innerHTML = SearchedId.qty;
+};
 
 

@@ -3,7 +3,7 @@ let card=document.getElementById("cards");
 let cardData=[
     {
         id:"1",
-        name:"WoodenTable",
+        name:"WoodenChair",
         img:"./Images/Chairs/Chair1.jpeg",
         desc:"Decorhand Rosewood (Sheesham) Wood Rocking Chair For Living Room",
         amt:"9,999",
@@ -17,7 +17,7 @@ let cardData=[
     },
     { 
         id:"3",
-        name:"Glass Teapoy",
+        name:"White CoffeeTable",
         img:"./Images/Coffee Tables/Teapoy3.jpg",
         desc:"ELTOP Engineered Wooden Furniture Centre Coffee Table with Glass Top",
         amt:"4,999",
@@ -25,18 +25,19 @@ let cardData=[
     },
     {
         id:"4",
-        name:"WoodenBed",
+        name:"King-Size Bed",
         img:"./Images/Beds/Bed2.jpg",
         desc:"Wooden cot King Size (78X72 inch) Bed Size Without Storage Teak Finish",
         amt:"48,989",
     },
 ];
 
-let stores= [];
+let stores= JSON.parse(localStorage.getItem("StoresData")) || []; //Getting data from LocalStorage 
 
 let products = () => {
     return (card.innerHTML = cardData.map((x)=>{
         let {id, name, img,desc, amt} = x;
+        //let search = stores.find((x)=>x.id === id) || []; // ${search.qty === undefined ? 0:search.qty}  if we find an id then store it or else show empty.
         return `
         <div id=item-id-${id} class="product">
             <img width="220" src="${img}" alt="WoodenChair">
@@ -71,10 +72,11 @@ let incPlus = (id) => {
     else{
         SearchedId.qty+=1;
     }
-
-    //console.log(stores);
+    localStorage.setItem("StoresData", JSON.stringify(stores));// Setting id and qty values inside LocalStorage ( Console => Applications => LocalStorage)
+    
     updateqty(itemSelected);
 };
+
 let decMinus = (id)=> {
     let itemSelected = id;
     let SearchedId = stores.find((x)=> x.id === itemSelected);//Finds the item id in stores, if selectedId is not there: then it adds item to "stores" else just ++qty of that selected item.
@@ -84,13 +86,19 @@ let decMinus = (id)=> {
         SearchedId.qty-=1;
     }
 
-    //console.log(stores);
+    localStorage.setItem("StoresData", JSON.stringify(stores));
+
     updateqty(itemSelected);
 };
+
 let updateqty = (id) => {
     let SearchedId = stores.find((x)=> x.id === id);
     console.log(SearchedId.qty);
     document.getElementById(id).innerHTML = SearchedId.qty;
+    summation();
 };
 
-
+let summation = () =>{
+    let cartsum = document.getElementById("cartPrice");
+    cartsum.innerHTML = stores.map((x)=>x.qty).reduce((x,y)=>x+y,0); // X and y used for summation of values.
+};

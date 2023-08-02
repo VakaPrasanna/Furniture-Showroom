@@ -37,7 +37,7 @@ let stores = JSON.parse(localStorage.getItem("Data")) || [];//Getting data from 
 let products = () => {
     return (card.innerHTML = cardData.map((x)=>{
         let {id, name, img,desc, amt} = x;
-        let SearchedId = stores.find((x) => x.SearchedId === id) || []; //  if we find an id then store it or else show empty.
+        let SearchedId = stores.find((x) => x.id === id) || []; //  if we find an id then store it or else show empty.
         return `
         <div id=item-id-${id} class="product">
             <img width="220" src="${img}" alt="WoodenChair">

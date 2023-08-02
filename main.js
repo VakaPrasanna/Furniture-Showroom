@@ -32,12 +32,12 @@ let cardData=[
     },
 ];
 
-let stores= JSON.parse(localStorage.getItem("StoresData")) || []; //Getting data from LocalStorage 
+let stores = JSON.parse(localStorage.getItem("Data")) || [];//Getting data from LocalStorage 
 
 let products = () => {
     return (card.innerHTML = cardData.map((x)=>{
         let {id, name, img,desc, amt} = x;
-        //let search = stores.find((x)=>x.id === id) || []; // ${search.qty === undefined ? 0:search.qty}  if we find an id then store it or else show empty.
+        let SearchedId = stores.find((x) => x.SearchedId === id) || []; //  if we find an id then store it or else show empty.
         return `
         <div id=item-id-${id} class="product">
             <img width="220" src="${img}" alt="WoodenChair">
@@ -48,7 +48,9 @@ let products = () => {
                   <h3>₹ ${amt}</h3>
                   <div class="buttons">
                     <i onclick="decMinus(${id})" class="bi bi-dash-square"></i>
-                    <div id=${id} class="qty">0</div>
+                    <div id=${id} class="qty">
+                    ${SearchedId.qty === undefined? 0: SearchedId.qty}
+                    </div>
                     <i onclick="incPlus(${id})" class="bi bi-plus-square"></i>   
                   </div>
                </div>
@@ -72,7 +74,7 @@ let incPlus = (id) => {
     else{
         SearchedId.qty+=1;
     }
-    localStorage.setItem("StoresData", JSON.stringify(stores));// Setting id and qty values inside LocalStorage ( Console => Applications => LocalStorage)
+    localStorage.setItem("Data", JSON.stringify(stores));// Setting id and qty values inside LocalStorage ( Console => Applications => LocalStorage)
     
     updateqty(itemSelected);
 };
@@ -86,7 +88,7 @@ let decMinus = (id)=> {
         SearchedId.qty-=1;
     }
 
-    localStorage.setItem("StoresData", JSON.stringify(stores));
+    localStorage.setItem("Data", JSON.stringify(stores));
 
     updateqty(itemSelected);
 };
@@ -102,3 +104,4 @@ let summation = () =>{
     let cartsum = document.getElementById("cartPrice");
     cartsum.innerHTML = stores.map((x)=>x.qty).reduce((x,y)=>x+y,0); // X and y used for summation of values.
 };
+summation();

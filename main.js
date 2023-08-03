@@ -74,9 +74,10 @@ let incPlus = (id) => {
     else{
         SearchedId.qty+=1;
     }
-    localStorage.setItem("Data", JSON.stringify(stores));// Setting id and qty values inside LocalStorage ( Console => Applications => LocalStorage)
     
     updateqty(itemSelected);
+
+    localStorage.setItem("Data", JSON.stringify(stores));// Setting id and qty values inside LocalStorage ( Console => Applications => LocalStorage)
 };
 
 let decMinus = (id)=> {
@@ -88,10 +89,10 @@ let decMinus = (id)=> {
     else{
         SearchedId.qty-=1;
     }
+    updateqty(itemSelected);
+    stores = stores.filter((i)=> i.qty !== 0);
 
     localStorage.setItem("Data", JSON.stringify(stores));
-
-    updateqty(itemSelected);
 };
 
 let updateqty = (id) => {

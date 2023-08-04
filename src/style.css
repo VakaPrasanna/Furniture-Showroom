@@ -41,7 +41,10 @@ body{
 i{
     cursor: pointer;
 }
-
+a{
+    text-decoration: none;
+    color:black;
+}
 .cards{
     display: grid;
     grid-template-columns: repeat(4, 225px);
@@ -92,4 +95,17 @@ i{
 
 .bi-plus-square{
    color:green;
+}
+.billdata{
+    text-align: center;
+    margin-bottom: 25px;
+}
+.Homebtn{
+    color:#000;
+    background-color:#e7c6ff;
+    padding: 7px;
+    border:none;
+    border-radius: 5px;
+    margin-top: 11px;
+    
 }

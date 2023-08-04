@@ -1,43 +1,11 @@
 let card=document.getElementById("cards");
 
-let cardData=[
-    {
-        id:"1",
-        name:"WoodenChair",
-        img:"./Images/Chairs/Chair1.jpeg",
-        desc:"Decorhand Rosewood (Sheesham) Wood Rocking Chair For Living Room",
-        amt:"9,999",
-    },
-    {   
-        id:"2",
-        name:"Blue Sofaset",
-        img:"./Images/Sofa/sofaset4.jpg",
-        desc:"Homeify Salena 5 Seater with 4-Puffy Convertible Fabric Sofa Set",
-        amt:"39,799",
-    },
-    { 
-        id:"3",
-        name:"White CoffeeTable",
-        img:"./Images/Coffee Tables/Teapoy3.jpg",
-        desc:"ELTOP Engineered Wooden Furniture Centre Coffee Table with Glass Top",
-        amt:"4,999",
-
-    },
-    {
-        id:"4",
-        name:"King-Size Bed",
-        img:"./Images/Beds/Bed2.jpg",
-        desc:"Wooden cot King Size (78X72 inch) Bed Size Without Storage Teak Finish",
-        amt:"48,989",
-    },
-];
-
 let stores = JSON.parse(localStorage.getItem("Data")) || [];//Getting data from LocalStorage 
 
 let products = () => {
     return (card.innerHTML = cardData.map((x)=>{
         let {id, name, img,desc, amt} = x;
-        let SearchedId = stores.find((y) => y.id == id) || []; //  if we find an id then store it or else show empty.
+        let {qty} = stores.find((y) => y.id == id) || []; //  if we find an id then store it or else show empty.
         return `
         <div id=item-id-${id} class="product">
             <img width="220" src="${img}" alt="WoodenChair">
@@ -49,7 +17,7 @@ let products = () => {
                   <div class="buttons">
                     <i onclick="decMinus(${id})" class="bi bi-dash-square"></i>
                     <div id=${id} class="qty">
-                    ${SearchedId.qty === undefined? 0: SearchedId.qty}
+                    ${qty||0}
                     </div>
                     <i onclick="incPlus(${id})" class="bi bi-plus-square"></i>   
                   </div>

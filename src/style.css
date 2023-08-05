@@ -96,6 +96,8 @@ a{
 .bi-plus-square{
    color:green;
 }
+
+
 .billdata{
     text-align: center;
     margin-bottom: 25px;
@@ -105,7 +107,12 @@ a{
     background-color:#e7c6ff;
     padding: 7px;
     border:none;
+    cursor: pointer;
     border-radius: 5px;
     margin-top: 11px;
     
+}
+.end-products{
+    color:red;
+    font-weight: bold;
 }

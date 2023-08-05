@@ -1,7 +1,7 @@
-let stores = JSON.parse(localStorage.getItem("Data")) || [];
 let bill = document.getElementById('bill');
 let spcart = document.getElementById('shoppingcart');
-console.log(stores);
+
+let stores = JSON.parse(localStorage.getItem("Data")) || [];
 
 let summation = () =>{
     let cartsum = document.getElementById("cartPrice");
@@ -10,16 +10,26 @@ let summation = () =>{
 summation();
 
 let purchaseditems = () => {
-    if(stores.length !== 0){
-    }
-    else{
-        spcart.innerHTML =``;
-        bill.innerHTML = `
+    if (stores.length !== 0) {
+      return (spcart.innerHTML = stores.map((x) => {
+          console.log(x);
+          let { id, qty } = x;
+          let search = cardData.find((y) =>y.id === id) || [];
+          return `
+              <div class="end-products">
+                Good
+                <img src=${search.img} alt=""/>
+              </div>`;
+        })
+        .join(""));
+    } else {
+      spcart.innerHTML = ``;
+      bill.innerHTML = `
          <h1>Cart is Empty</h1>
          <a href="index.html">
             <button class="Homebtn">ADD ITEMS</button>
          </a>
-         `
+         `;
     }
-};
+  };
 purchaseditems();

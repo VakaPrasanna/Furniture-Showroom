@@ -15,15 +15,15 @@ let cardData=[
     },
     { 
         id:"3",
-        name:"White CoffeeTable",
-        img:"./Images/Coffee Tables/Teapoy3.jpg",
+        name:"White Teapoy",
+        img:"./Images/CoffeeTables/Teapoy3.jpg",
         desc:"ELTOP Engineered Wooden Furniture Centre Coffee Table with Glass Top",
         amt:"4,999",
 
     },
     {
         id:"4",
-        name:"King-Size Bed",
+        name:"KingSize Bed",
         img:"./Images/Beds/Bed2.jpg",
         desc:"Wooden cot King Size (78X72 inch) Bed Size Without Storage Teak Finish",
         amt:"48,989",

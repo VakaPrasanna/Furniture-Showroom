@@ -35,7 +35,7 @@ let purchaseditems = () => {
                     <i onclick="incPlus(${id})" class="bi bi-plus-square"></i>   
                   </div>
 
-                  <h3>₹ ${qty}</h3>
+                  <h3>₹ ${qty * search.amt}</h3>
 
                 </div>
                 
@@ -73,6 +73,7 @@ let incPlus = (id) => {
   localStorage.setItem("Data", JSON.stringify(stores));// Setting id and qty values inside LocalStorage ( Console => Applications => LocalStorage)
 };
 
+
 let decMinus = (id)=> {
   let itemSelected = id;
   let SearchedId = stores.find((x)=> x.id === itemSelected);//Finds the item id in stores, if selectedId is not there: then it adds item to "stores" else just ++qty of that selected item.
@@ -87,6 +88,8 @@ let decMinus = (id)=> {
   purchaseditems(); // If zero items on any card of final item.
   localStorage.setItem("Data", JSON.stringify(stores));
 };
+
+
 
 let updateqty = (id) => {
   let SearchedId = stores.find((x)=> x.id === id);

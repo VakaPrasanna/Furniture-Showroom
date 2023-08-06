@@ -124,11 +124,11 @@ let finalAmount = () => {
     let finalamt = stores.map((x)=>{
       let {qty, id} =x;
       let search = cardData.find((y) => y.id == id) || [];
-      return (qty * search.amt);
+      return  qty * search.amt;
     }).reduce((x,y)=> x+y, 0);
     //console.log(finalamt);
     bill.innerHTML =`
-      <h1>Total Amount :   ₹ ${finalamt} </h1>
+      <h1>Total Amount :  ₹ ${finalamt} </h1>
       <button onclick="clearCart()" class="clear-all">Clear Cart</button>
     `;
   }

@@ -14,8 +14,9 @@ body{
     padding: 30px 60px;
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
 }
 
 .cart{
@@ -50,6 +51,7 @@ a{
     grid-template-columns: repeat(4, 225px);
     gap: 35px;
     justify-content: center;
+    margin-bottom: 30px;
 }
 
 @media(max-width:1010px){
@@ -66,6 +68,10 @@ a{
 .product{
    border: 2px solid black; 
    border-radius: 5px;
+}
+.product img{
+    width:100%;
+    border-radius:2px 2px 0 0; /* top-left, top-right, bottom-left, bottom-right corners of images in cards*/
 }
 
 .cardData{
@@ -87,6 +93,7 @@ a{
     display: flex;
     flex-direction: row;
     gap:7px;
+    margin-left: 3px;
 }
 
 .bi-dash-square{
@@ -102,8 +109,9 @@ a{
     text-align: center;
     margin-bottom: 25px;
 }
-.Homebtn{
+.Homebtn, .checkout, .clear-all{
     color:#000;
+    font-weight: bold;
     background-color:#e7c6ff;
     padding: 7px;
     border:none;
@@ -112,6 +120,17 @@ a{
     margin-top: 11px;
     
 }
+
+.checkout{
+    background-color: green;
+    color:#fff;
+}
+
+.clear-all{
+    background-color:red;
+    color:#fff;
+}
+
 .bi-x-circle-fill{
     color:red;
     font-weight: bold;
@@ -162,5 +181,5 @@ a{
 }
 
 .qty{
-  margin-bottom:25px;
+  margin-bottom: 0px;
 }

@@ -12,30 +12,30 @@ summation();
 let purchaseditems = () => {
     if (stores.length !== 0) {
       return (spcart.innerHTML = stores.map((x) => {  
-          console.log(x);
           let { id, qty } = x;
           let search = cardData.find((y) => y.id == id) || [];
+          let {img, name, amt} = search; // destructuring of an object.
           return `
               <div class="end-products">
-                <img width="150" src=${search.img} alt="" />
+                <img width="150" src=${img} alt="" />
 
                 <div class="end-products-details">
 
                   <div class="ItemName-price-bill" >
                     <h3 class="Item-amt">
-                      <p>${search.name}</p>
-                      <p class="Amt-of-each-item">₹ ${search.amt}</p>
+                      <p>${name}</p>
+                      <p class="Amt-of-each-item">₹ ${amt}</p>
                     </h3>
-                    <i class="bi bi-x-circle-fill"></i>
+                    <i onclick="deleteFinalItem(${id})" class="bi bi-x-circle-fill"></i>
                   </div>
 
                   <div class="buttons">
                     <i onclick="decMinus(${id})" class="bi bi-dash-square"></i>
-                    <div id=${id} class="qty">${qty||0}</div>
+                    <div id=${id} class="qty">${qty}</div>
                     <i onclick="incPlus(${id})" class="bi bi-plus-square"></i>   
                   </div>
 
-                  <h3>₹ ${qty * search.amt}</h3>
+                  <h3 style="margin-top: 25px; margin-left: 5px;">₹ ${qty * search.amt}</h3>
 
                 </div>
                 
@@ -54,6 +54,7 @@ let purchaseditems = () => {
   };
 purchaseditems();
 
+
 let incPlus = (id) => {
   let itemSelected = id;
   let SearchedId = stores.find((x)=> x.id === itemSelected);//Finds the item id in stores, if selectedId is not there: then it adds item to "stores" else just ++qty of that selected item.
@@ -67,7 +68,7 @@ let incPlus = (id) => {
   else{
       SearchedId.qty+=1;
   }
-  
+  purchaseditems();
   updateqty(itemSelected);
 
   localStorage.setItem("Data", JSON.stringify(stores));// Setting id and qty values inside LocalStorage ( Console => Applications => LocalStorage)
@@ -96,4 +97,41 @@ let updateqty = (id) => {
   console.log(SearchedId.qty);
   document.getElementById(id).innerHTML = SearchedId.qty;
   summation();
+  finalAmount();
 };
+
+let deleteFinalItem = (id) => {
+    let delItem = id;
+    //console.log(delItem);
+    stores = stores.filter((x)=>x.id !== delItem);
+    purchaseditems();
+    finalAmount();
+    summation();
+    localStorage.setItem("Data", JSON.stringify(stores));
+
+};
+
+
+let clearCart = () => {
+  stores = [];
+  purchaseditems();
+  summation();
+  localStorage.setItem("Data", JSON.stringify(stores));
+};
+
+let finalAmount = () => {
+  if(stores.length !== 0){
+    let finalamt = stores.map((x)=>{
+      let {qty, id} =x;
+      let search = cardData.find((y) => y.id == id) || [];
+      return (qty * search.amt);
+    }).reduce((x,y)=> x+y, 0);
+    //console.log(finalamt);
+    bill.innerHTML =`
+      <h1>Total Amount :   ₹ ${finalamt} </h1>
+      <button onclick="clearCart()" class="clear-all">Clear Cart</button>
+    `;
+  }
+  else return;
+};
+finalAmount();
